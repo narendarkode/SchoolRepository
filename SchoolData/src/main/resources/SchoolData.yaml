@@ -1,0 +1,159 @@
+openapi: 3.0.0
+info:
+  title: Student Management API
+  description: API for managing student details.
+  version: 1.0.0
+servers:
+  - url: http://localhost:8080
+    description: Local server
+
+paths:
+  /students:
+    get:
+      summary: Get all students
+      description: Retrieve a list of all students.
+      responses:
+        '200':
+          description: List of students retrieved successfully.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Student'
+        '500':
+          description: Internal server error.
+      tags:
+        - Students
+    post:
+      summary: Create a new student
+      description: Add a new student to the database.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Student'
+      responses:
+        '201':
+          description: Student created successfully.
+        '400':
+          description: Invalid input.
+        '500':
+          description: Internal server error.
+      tags:
+        - Students
+
+  /students/{id}:
+    get:
+      summary: Get student by ID
+      description: Retrieve details of a specific student by their ID.
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: The unique identifier of the student.
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Student details retrieved successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Student'
+        '404':
+          description: Student not found.
+        '500':
+          description: Internal server error.
+      tags:
+        - Students
+    put:
+      summary: Update student details
+      description: Update details of an existing student.
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: The unique identifier of the student.
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Student'
+      responses:
+        '200':
+          description: Student updated successfully.
+        '400':
+          description: Invalid input.
+        '404':
+          description: Student not found.
+        '500':
+          description: Internal server error.
+      tags:
+        - Students
+    delete:
+      summary: Delete student by ID
+      description: Remove a student from the database by their ID.
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: The unique identifier of the student.
+          schema:
+            type: string
+      responses:
+        '204':
+          description: Student deleted successfully.
+        '404':
+          description: Student not found.
+        '500':
+          description: Internal server error.
+      tags:
+        - Students
+
+components:
+  schemas:
+    Student:
+      type: object
+      properties:
+        id:
+          type: string
+          description: The unique identifier of the student.
+        studentName:
+          type: string
+          description: The name of the student.
+        classTeacherName:
+          type: string
+          description: The name of the student's class teacher.
+        principalName:
+          type: string
+          description: The name of the school's principal.
+        grade:
+          type: string
+          description: The grade of the student.
+        feeDetails:
+          type: boolean
+          description: Indicates if the fee details are available or paid.
+      required:
+        - id
+        - studentName
+        - grade
+
+securitySchemes:
+  bearerAuth:
+    type: http
+    scheme: bearer
+    bearerFormat: JWT
+
+
+
+
+
+
+
+
+

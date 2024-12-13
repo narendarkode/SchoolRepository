@@ -1,0 +1,150 @@
+openapi:3.0.3
+info:
+  title: wells forgo virtual machine as a service (VMAAS) API
+    version: v2
+    contact:
+      name:
+        email:
+          description:
+
+
+
+
+servers:
+  -url:
+     description:
+    -url:
+      description:
+  -url:
+    description:
+    -url:
+      description:
+    -url:
+      description:
+    -url:
+      description:
+    -url:
+      description:
+    -url: http://localhost:8080
+      description: Local Development
+
+paths:
+  #
+  #About
+  #
+  /infra-compute/virtual-resources/vmaas/v2:
+    get:
+      summary: About
+      description: >
+        Returns the API version information (both latest and supported versions) as well as a collection of HATEOAS links describing the available endpoints for this API.
+      operationId: about
+      responses:
+        200:
+          description:
+            content:
+              application/json:
+                schema:
+                  $ref:
+                links:
+                  self:
+                    operationId:
+                  datacenters:
+                    operationId:
+                  requests:
+                    operationId:
+                    parameters:
+                      datacenter:
+                      environmentGroup:
+                  virtual-machines:
+                    operationId:
+                      parameters:
+                        datacenter:
+                        environmentGroup:
+                  # common error Responses
+                  4XX:
+                    $ref:
+                  5XX:
+                    $ref:
+                security:
+                  -OAuth:
+                    - EIAD-VMaaS-Read
+                    - EIAD-VMaaS-Read-Platform
+                    - EIAD-VMaaS-Read-Impersonate
+                    - EIAD-VMaaS-Write
+                    - EIAD-VMaaS-Write-Platform
+                    - EIAD-VMaaS-Write-Impersonate
+                parameters:
+                  # Common Headers
+                  - $ref: '#/components/parameters/Authorization'
+                  - $ref: '#/components/parameters/X-API-KEY'
+                  - $ref: '#/components/parameters/X-REQUEST-ID'
+                  - $ref: '#/components/parameters/X-CORRELATION-ID'
+                  - $ref: '#/components/parameters/X-WF-CLIENT-ID'
+                  - $ref: '#/components/parameters/X-WF-REQUEST-DATE'
+  #
+  # Data Centers
+  #
+  /infra-compute/virtual-resources/vmaas/v2/datacenters:
+    get:
+       summary: Get List of Supported Data Centers
+       description: >
+        Returns a list of data centers supported by VMaaS
+      tags:
+         - Data Centers
+    operationId: =getDataCenters
+    responses:
+      200:
+        description: Returned list of Supported data centers successfully. (ok)
+        content:
+          application/json:
+            schema:
+              $ref:
+            links:
+              self:
+                operationId:
+              datacenters:
+                operationId:
+              requests:
+                operationId:
+                parameters:
+                  datacenter:
+                  environmentGroup:
+              virtual-machines:
+                operationId:
+                  parameters:
+                    datacenter:
+                    environmentGroup:
+              # common error Responses
+              4XX:
+                $ref:
+              5XX:
+                $ref:
+            security:
+              -OAuth:
+                - EIAD-VMaaS-Read
+                - EIAD-VMaaS-Read-Platform
+                - EIAD-VMaaS-Read-Impersonate
+                - EIAD-VMaaS-Write
+                - EIAD-VMaaS-Write-Platform
+                - EIAD-VMaaS-Write-Impersonate
+            parameters:
+              # Common Headers
+              - $ref: '#/components/parameters/Authorization'
+              - $ref: '#/components/parameters/X-API-KEY'
+              - $ref: '#/components/parameters/X-REQUEST-ID'
+              - $ref: '#/components/parameters/X-CORRELATION-ID'
+              - $ref: '#/components/parameters/X-WF-CLIENT-ID'
+              - $ref: '#/components/parameters/X-WF-REQUEST-DATE'
+
+
+
+
+
+
+
+
+
+
+
+
+
